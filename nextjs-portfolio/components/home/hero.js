@@ -1,3 +1,6 @@
+import Animation from "./animation";
+import Link from "next/link";
+
 export default function Hero() {
     return (
         <>
@@ -9,10 +12,13 @@ export default function Hero() {
         디자인 시스템의 인기는 폭발적으로 증가하고 있습니다. Airbnb와 같은 거대 기술 기업부터 신생 스타트업까지, 회사들은 시간과 비용을 절약하기 위해 UI 패턴을 재사용하는 방식을 도입하고 있습니다. 하지만 BBC, Airbnb, Microsoft에서 만든 디자인 시스템과 대부분의 개발자가 만든 디자인 시스템 사이에는 큰 차이가 존재합니다.
         </p>
         <div className="flex justify-center">
-            <button className="inline-flex px-6 py-2 text-lg text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">프로젝트 보러가기</button>
+            <Link href="/projects">
+                <a className="btn-project">프로젝트 보러가기</a>
+            </Link>
         </div>
         </div>
         <div className="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+            <Animation/>
         </div>
         </>
     );
