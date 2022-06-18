@@ -8,8 +8,8 @@ export default function Projects({projects}) {
         <Layout>
             <div className="flex flex-col items-center justify-center min-h-screen px-5 px-6 py-20 mb-10">
             <Head>
-                <title>NextJs 포트폴리오</title>
-                <meta name="description" content="NextJs 포트폴리오" />
+                <title>NextJs 포트폴리오 - 프로젝트</title>
+                <meta name="description" content="NextJs 포트폴리오 - 프로젝트" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <h4 className="text-4xl font-bold sm:text-6xl">
