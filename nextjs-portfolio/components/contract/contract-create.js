@@ -4,17 +4,103 @@ export default function ContractCreate() {
         event.preventDefault()
 
         // Get data from the form.
+        // const data = {
+        //     category: event.target.category.value,
+        //     budget: event.target.budget.value,
+        //     client: event.target.client.value,
+        //     created_at: event.target.created_at.value,
+        //     link: event.target.link.value,
+        //     staff: event.target.staff.value,
+        //     type: event.target.type.value,
+        // }
+
         const data = {
-            name: event.target.name.value,
-            email: event.target.email.value,
-            message: event.target.message.value,
+            "parent": {
+                "database_id": "aef3f45f27e14af7ac45469f22b09bfb"
+            },
+            "cover": {
+                "external": {
+                    "url": "https://www.notion.so/images/page-cover/met_horace_pippin.jpg"
+                }
+            },
+            "properties": {
+                "title": {
+                    "title": [{
+                        "text": {
+                            "content" : "신규 런칭 차량관리 앱 다운 및 회원가입 마케팅"
+                        }
+                    }]
+                },
+                "category": {
+                    "multi_select": [{
+                        "color": "gray",
+                        "name": "통합마케팅"
+                    }]
+                },
+                "budget": {
+                    "rich_text": [{
+                        "text": {
+                            "content" : "7,000,000원"
+                        }
+                    }]
+                },
+                "client": {
+                    "rich_text": [{
+                        "text": {
+                            "content" : "이철영"
+                        }
+                    }]
+                },
+                "created_at": {
+                    "date": {
+                        "start": "2022-06-22"
+                    }
+                },
+                "link": {
+                    "url": "https://madahm.com/project/detail/4787"
+                },
+                "staff": {
+                    "rich_text": [{
+                        "text": {
+                            "content" : "차봉준 팀장"
+                        }
+                    }]
+                },
+                "type": {
+                    "rich_text": [{
+                        "text": {
+                            "content" : "모집중"
+                        }
+                    }]
+                }
+            }
         }
 
         const JSONdata = JSON.stringify(data);
 
-        // TODO 등록 로직 완성하자!
-        console.log(data);
-        console.log(JSONdata);
+        // console.log(data);
+        // console.log(JSONdata);
+
+        const options = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Notion-Version': '2022-02-22',
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer secret_eg3hRJs3uzwCWTcKTkMtL1NEibLh83zQjRd9yUoo1D0'
+            },
+            body: JSONdata
+            // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
+        };
+
+        const res = await fetch('/api/create', options);
+        
+        console.log(res);
+
+        // fetch('/api/create', options)
+        //     .then(response => response.json())
+        //     .then(response => console.log(response))
+        //     .catch(err => console.error(err));
     }
 
     return (
@@ -29,20 +115,50 @@ export default function ContractCreate() {
                     <div className="flex flex-wrap -m-2">
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="name" className="text-sm leading-7 text-gray-600">Name</label>
-                            <input type="text" id="name" name="name" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            <label htmlFor="category" className="text-sm leading-7 text-gray-600">카테고리</label>
+                            <input type="text" id="category" name="category" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
                             </div>
                         </div>
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="email" className="text-sm leading-7 text-gray-600">Email</label>
-                            <input type="email" id="email" name="email" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            <label htmlFor="budget" className="text-sm leading-7 text-gray-600">가격</label>
+                            <input type="text" id="budget" name="budget" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
                             </div>
                         </div>
-                        <div className="w-full p-2">
+                        <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="message" className="text-sm leading-7 text-gray-600">Message</label>
-                            <textarea id="message" name="message" className="w-full h-32 px-3 py-1 text-base leading-6 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none resize-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"></textarea>
+                            <label htmlFor="client" className="text-sm leading-7 text-gray-600">클라이언트</label>
+                            <input type="text" id="client" name="client" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            </div>
+                        </div>
+                        <div className="w-1/2 p-2">
+                            <div className="relative">
+                            <label htmlFor="created_at" className="text-sm leading-7 text-gray-600">등록일</label>
+                            <input type="text" id="created_at" name="created_at" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            </div>
+                        </div>
+                        <div className="w-1/2 p-2">
+                            <div className="relative">
+                            <label htmlFor="link" className="text-sm leading-7 text-gray-600">링크</label>
+                            <input type="text" id="link" name="link" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            </div>
+                        </div>
+                        <div className="w-1/2 p-2">
+                            <div className="relative">
+                            <label htmlFor="staff" className="text-sm leading-7 text-gray-600">담당자</label>
+                            <input type="text" id="staff" name="staff" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            </div>
+                        </div>
+                        <div className="w-1/2 p-2">
+                            <div className="relative">
+                            <label htmlFor="type" className="text-sm leading-7 text-gray-600">구분</label>
+                            <input type="text" id="type" name="type" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            </div>
+                        </div>
+                        <div className="w-1/2 p-2">
+                            <div className="relative">
+                            <label htmlFor="title" className="text-sm leading-7 text-gray-600">제목</label>
+                            <input type="text" id="title" name="title" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
                             </div>
                         </div>
                         <div className="w-full p-2">

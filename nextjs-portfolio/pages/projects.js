@@ -39,7 +39,7 @@ export async function getStaticProps(context) {
         body: JSON.stringify({
             sorts: [
                 {
-                    "property": "title",
+                    "property": "created_at",
                     "direction": "descending"
                 }
             ],
