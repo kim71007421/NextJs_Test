@@ -2,6 +2,7 @@
 import Image from "next/image";
 
 export default function ProjectItem({data}) {
+    // console.log(data);
     const title = data.properties.title.title[0].plain_text;
     const type = data.properties.type.rich_text[0].plain_text;
     const link = data.properties.link.url;
