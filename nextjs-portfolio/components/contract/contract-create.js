@@ -15,61 +15,61 @@ export default function ContractCreate() {
         // }
 
         const data = {
-            "parent": {
-                "database_id": "aef3f45f27e14af7ac45469f22b09bfb"
+            parent: {
+                database_id: "aef3f45f27e14af7ac45469f22b09bfb"
             },
-            "cover": {
-                "external": {
-                    "url": "https://www.notion.so/images/page-cover/met_horace_pippin.jpg"
+            cover: {
+                external: {
+                    url: "https://www.notion.so/images/page-cover/met_horace_pippin.jpg"
                 }
             },
-            "properties": {
-                "title": {
-                    "title": [{
-                        "text": {
-                            "content" : "신규 런칭 차량관리 앱 다운 및 회원가입 마케팅"
+            properties: {
+                title: {
+                    title: [{
+                        text: {
+                            content : "신규 런칭 차량관리 앱 다운 및 회원가입 마케팅"
                         }
                     }]
                 },
-                "category": {
-                    "multi_select": [{
-                        "color": "gray",
-                        "name": "통합마케팅"
+                category: {
+                    multi_select: [{
+                        color: "gray",
+                        name: "통합마케팅"
                     }]
                 },
-                "budget": {
-                    "rich_text": [{
-                        "text": {
-                            "content" : "7,000,000원"
+                budget: {
+                    rich_text: [{
+                        text: {
+                            content : "7,000,000원"
                         }
                     }]
                 },
-                "client": {
-                    "rich_text": [{
-                        "text": {
-                            "content" : "이철영"
+                client: {
+                    rich_text: [{
+                        text: {
+                            content : "이철영"
                         }
                     }]
                 },
-                "created_at": {
-                    "date": {
-                        "start": "2022-06-22"
+                created_at: {
+                    date: {
+                        start: "2022-06-22"
                     }
                 },
-                "link": {
-                    "url": "https://madahm.com/project/detail/4787"
+                link: {
+                    url: "https://madahm.com/project/detail/4787"
                 },
-                "staff": {
-                    "rich_text": [{
-                        "text": {
-                            "content" : "차봉준 팀장"
+                staff: {
+                    rich_text: [{
+                        text: {
+                            content : "차봉준 팀장"
                         }
                     }]
                 },
-                "type": {
-                    "rich_text": [{
-                        "text": {
-                            "content" : "모집중"
+                type: {
+                    rich_text: [{
+                        text: {
+                            content : "모집중"
                         }
                     }]
                 }
@@ -81,26 +81,36 @@ export default function ContractCreate() {
         // console.log(data);
         // console.log(JSONdata);
 
+        // const options = {
+        //     method: 'POST',
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Notion-Version': '2022-02-22',
+        //         'Content-Type': 'application/json',
+        //         Authorization: 'Bearer secret_eg3hRJs3uzwCWTcKTkMtL1NEibLh83zQjRd9yUoo1D0'
+        //     },
+        //     body: JSONdata
+        //     // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
+        // };
+
+        // fetch('https://api.notion.com/v1/pages', options)
+        //     .then(response => response.json())
+        //     .then(response => console.log(response))
+        //     .catch(err => console.error(err));
+
         const options = {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
-                'Notion-Version': '2022-02-22',
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer secret_eg3hRJs3uzwCWTcKTkMtL1NEibLh83zQjRd9yUoo1D0'
             },
             body: JSONdata
             // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
         };
 
-        const res = await fetch('/api/create', options);
-        
-        console.log(res);
-
-        // fetch('/api/create', options)
-        //     .then(response => response.json())
-        //     .then(response => console.log(response))
-        //     .catch(err => console.error(err));
+        fetch('/api/create', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
     }
 
     return (
