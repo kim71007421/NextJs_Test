@@ -81,6 +81,10 @@ export default function ContractCreate() {
         // https://api.notion.com/v1/pages
         axios.post('https://api.notion.com/v1/pages', JsonData, {
             headers: {
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Headers' : 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+                'Access-Control-Allow-Methods' : 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
                 'Accept': 'application/json',
                 'Notion-Version': '2022-02-22',
                 'Content-Type': 'application/json',
