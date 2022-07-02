@@ -1,3 +1,4 @@
+import axios from "axios";
 
 export default function ContractCreate() {
     const handleSubmit = async (event) => {
@@ -75,9 +76,24 @@ export default function ContractCreate() {
                 }
             }
         }
-
-        const JSONdata = JSON.stringify(data);
-
+        const JsonData = JSON.stringify(data);
+        console.log(JsonData);
+        // https://api.notion.com/v1/pages
+        axios.post('/api/v1/pages', JsonData, {
+            headers: {
+                'Accept': 'application/json',
+                'Notion-Version': '2022-02-22',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer secret_eg3hRJs3uzwCWTcKTkMtL1NEibLh83zQjRd9yUoo1D0'
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        
         // console.log(data);
         // console.log(JSONdata);
 
@@ -93,24 +109,24 @@ export default function ContractCreate() {
         //     // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
         // };
 
-        // fetch('https://api.notion.com/v1/pages', options)
+        // fetch('/api/v1/pages', options)
         //     .then(response => response.json())
         //     .then(response => console.log(response))
         //     .catch(err => console.error(err));
 
-        const options = {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-            },
-            body: JSONdata
-            // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
-        };
+        // const options = {
+        //     method: 'POST',
+        //     headers: {
+        //         Accept: 'application/json',
+        //     },
+        //     body: JSONdata
+        //     // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
+        // };
 
-        fetch('/api/create', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
+        // fetch('/api/v1/pages', options)
+        //     .then(response => response.json())
+        //     .then(response => console.log(response))
+        //     .catch(err => console.error(err));
     }
 
     return (
