@@ -79,7 +79,7 @@ export default function ContractCreate() {
         const JsonData = JSON.stringify(data);
         console.log(JsonData);
         // https://api.notion.com/v1/pages
-        axios.post('/api/v1/pages', JsonData, {
+        axios.post('https://api.notion.com/v1/pages', JsonData, {
             headers: {
                 'Accept': 'application/json',
                 'Notion-Version': '2022-02-22',
