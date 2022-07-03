@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Projects({projects}) {
     return (
         <Layout>
-            <div className="flex flex-col items-center justify-center min-h-screen px-5 px-6 py-20 mb-10">
+            <div className="flex flex-col items-center justify-center min-h-screen px-6 py-20 mb-10">
             <Head>
                 <title>NextJs 포트폴리오 - 프로젝트</title>
                 <meta name="description" content="NextJs 포트폴리오 - 프로젝트" />
@@ -28,7 +28,7 @@ export default function Projects({projects}) {
     );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
 
     const res = await axios.post(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, JSON.stringify({page_size: 100}), {
         headers: {
