@@ -1,136 +1,50 @@
 import axios from "axios";
+import Image from "next/image";
 
 export default function ContractCreate() {
     const handleSubmit = async (event) => {
-        event.preventDefault()
-
-        // Get data from the form.
-        // const data = {
-        //     category: event.target.category.value,
-        //     budget: event.target.budget.value,
-        //     client: event.target.client.value,
-        //     created_at: event.target.created_at.value,
-        //     link: event.target.link.value,
-        //     staff: event.target.staff.value,
-        //     type: event.target.type.value,
-        // }
+        event.preventDefault();
+        
+        console.log(event.target.title.value)
 
         const data = {
-            parent: {
-                database_id: "aef3f45f27e14af7ac45469f22b09bfb"
-            },
-            cover: {
-                external: {
-                    url: "https://www.notion.so/images/page-cover/met_horace_pippin.jpg"
-                }
-            },
-            properties: {
-                title: {
-                    title: [{
-                        text: {
-                            content : "신규 런칭 차량관리 앱 다운 및 회원가입 마케팅"
-                        }
-                    }]
-                },
-                category: {
-                    multi_select: [{
-                        color: "gray",
-                        name: "통합마케팅"
-                    }]
-                },
-                budget: {
-                    rich_text: [{
-                        text: {
-                            content : "7,000,000원"
-                        }
-                    }]
-                },
-                client: {
-                    rich_text: [{
-                        text: {
-                            content : "이철영"
-                        }
-                    }]
-                },
-                created_at: {
-                    date: {
-                        start: "2022-06-22"
-                    }
-                },
-                link: {
-                    url: "https://madahm.com/project/detail/4787"
-                },
-                staff: {
-                    rich_text: [{
-                        text: {
-                            content : "차봉준 팀장"
-                        }
-                    }]
-                },
-                type: {
-                    rich_text: [{
-                        text: {
-                            content : "모집중"
-                        }
-                    }]
-                }
-            }
-        }
+            title: event.target.title.value,
+            category: event.target.category.value,
+            budget: event.target.budget.value,
+            created_at: event.target.created_at.value,
+            cover: event.target.cover.value,
+            client: event.target.client.value,
+            link: event.target.link.value,
+            staff: event.target.staff.value,
+            type: event.target.type.value,
+        };
+        console.log(data);
+        /* const data = {
+            title: '신규 런칭 차량관리 앱 다운 및 회원가입 마케팅',
+            category: '통합마케팅',
+            budget: '7,000,000원',
+            created_at: '2022-07-03',
+            cover: 'https://www.notion.so/images/page-cover/met_horace_pippin.jpg',
+            client: '이철영',
+            link: 'https://madahm.com/project/detail/4787',
+            staff: '차봉준 팀장',
+            type: '모집중'
+        }; */
+
         const JsonData = JSON.stringify(data);
-        console.log(JsonData);
-        // https://api.notion.com/v1/pages
-        axios.post('https://api.notion.com/v1/pages', JsonData, {
+
+        axios.post('/api/create', JsonData, {
             headers: {
-                'Access-Control-Allow-Credentials': true,
-                'Access-Control-Allow-Origin' : '*',
-                'Access-Control-Allow-Headers' : 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
-                'Access-Control-Allow-Methods' : 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
                 'Accept': 'application/json',
-                'Notion-Version': '2022-02-22',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer secret_eg3hRJs3uzwCWTcKTkMtL1NEibLh83zQjRd9yUoo1D0'
             }
         })
         .then(function (response) {
-            console.log(response);
+            // console.log(response.status);
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error.data);
         });
-        
-        // console.log(data);
-        // console.log(JSONdata);
-
-        // const options = {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Notion-Version': '2022-02-22',
-        //         'Content-Type': 'application/json',
-        //         Authorization: 'Bearer secret_eg3hRJs3uzwCWTcKTkMtL1NEibLh83zQjRd9yUoo1D0'
-        //     },
-        //     body: JSONdata
-        //     // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
-        // };
-
-        // fetch('/api/v1/pages', options)
-        //     .then(response => response.json())
-        //     .then(response => console.log(response))
-        //     .catch(err => console.error(err));
-
-        // const options = {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //     },
-        //     body: JSONdata
-        //     // body: JSON.stringify({parent: `${DATABASE_ID}`, properties: JSONdata})
-        // };
-
-        // fetch('/api/v1/pages', options)
-        //     .then(response => response.json())
-        //     .then(response => console.log(response))
-        //     .catch(err => console.error(err));
     }
 
     return (
@@ -145,14 +59,8 @@ export default function ContractCreate() {
                     <div className="flex flex-wrap -m-2">
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="category" className="text-sm leading-7 text-gray-600">카테고리</label>
-                            <input type="text" id="category" name="category" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
-                            </div>
-                        </div>
-                        <div className="w-1/2 p-2">
-                            <div className="relative">
-                            <label htmlFor="budget" className="text-sm leading-7 text-gray-600">가격</label>
-                            <input type="text" id="budget" name="budget" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                            <label htmlFor="title" className="text-sm leading-7 text-gray-600">제목</label>
+                            <input type="text" id="title" name="title" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
                             </div>
                         </div>
                         <div className="w-1/2 p-2">
@@ -163,32 +71,87 @@ export default function ContractCreate() {
                         </div>
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="created_at" className="text-sm leading-7 text-gray-600">등록일</label>
-                            <input type="text" id="created_at" name="created_at" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                                <label htmlFor="category" className="block text-sm font-medium text-gray-700">카테고리</label>
+                                <select id="category" name="category" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="통합마케팅">통합마케팅</option>
+                                    <option value="온라인">온라인</option>
+                                    <option value="오프라인">오프라인</option>
+                                    <option value="CPA">CPA</option>
+                                    <option value="영상제작">영상제작</option>
+                                    <option value="웹앱개발">웹앱개발</option>
+                                </select>
                             </div>
                         </div>
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="link" className="text-sm leading-7 text-gray-600">링크</label>
-                            <input type="text" id="link" name="link" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                                <label htmlFor="budget" className="block text-sm font-medium text-gray-700">가격</label>
+                                <select id="budget" name="budget" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="1,100,000원">1,100,000원</option>
+                                    <option value="2,140,000원">2,140,000원</option>
+                                    <option value="5,500,000원">5,500,000원</option>
+                                    <option value="10,050,000원">10,050,000원</option>
+                                </select>
                             </div>
                         </div>
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="staff" className="text-sm leading-7 text-gray-600">담당자</label>
-                            <input type="text" id="staff" name="staff" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                                <label htmlFor="created_at" className="block text-sm font-medium text-gray-700">등록일</label>
+                                <select id="created_at" name="created_at" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="2022-07-01">2022-07-01</option>
+                                    <option value="2022-07-02">2022-07-02</option>
+                                    <option value="2022-07-03">2022-07-03</option>
+                                    <option value="2022-07-04">2022-07-04</option>
+                                    <option value="2022-07-05">2022-07-05</option>
+                                    <option value="2022-07-06">2022-07-06</option>
+                                </select>
                             </div>
                         </div>
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="type" className="text-sm leading-7 text-gray-600">구분</label>
-                            <input type="text" id="type" name="type" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                                <label htmlFor="link" className="block text-sm font-medium text-gray-700">프로젝트링크</label>
+                                <select id="link" name="link" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="https://madahm.com/project/detail/4813">종합 쇼핑몰 온라인 통합 마케팅</option>
+                                    <option value="https://madahm.com/project/detail/4608">P2E 게임 블록체인 글로벌 온오프라인 캠페인</option>
+                                    <option value="https://madahm.com/project/detail/4793">반려동물 토탈 케어 플랫폼 온오프라인 통합 마케팅</option>
+                                    <option value="https://madahm.com/project/detail/4835">반려동물용품 구글 퍼포먼스 마케팅</option>
+                                    <option value="https://madahm.com/project/detail/4832">밀키트 스토어팜 검색광고 대행</option>
+                                    <option value="https://madahm.com/project/detail/4676">2022 한강나이트워크 야외 부스행사 대행</option>
+                                </select>
                             </div>
                         </div>
                         <div className="w-1/2 p-2">
                             <div className="relative">
-                            <label htmlFor="title" className="text-sm leading-7 text-gray-600">제목</label>
-                            <input type="text" id="title" name="title" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200"/>
+                                <label htmlFor="staff" className="block text-sm font-medium text-gray-700">담당자</label>
+                                <select id="staff" name="staff" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="유재형 팀장">유재형 팀장</option>
+                                    <option value="이다훈 대리">이다훈 대리</option>
+                                    <option value="이현규 사원">이현규 사원</option>
+                                    <option value="차봉중 팀장">차봉중 팀장</option>
+                                    <option value="안현진 사원">안현진 사원</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="w-1/2 p-2">
+                            <div className="relative">
+                                <label htmlFor="type" className="block text-sm font-medium text-gray-700">구분</label>
+                                <select id="type" name="type" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="검토중">검토중</option>
+                                    <option value="검토완료">검토완료</option>
+                                    <option value="모집중">모집중</option>
+                                    <option value="선정중">선정중</option>
+                                    <option value="계약">계약</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="w-1/2 p-2">
+                            <div className="relative">
+                                <label htmlFor="cover" className="block text-sm font-medium text-gray-700">커버이미지</label>
+                                <select id="cover" name="cover" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option value="https://www.notion.so/images/page-cover/met_horace_pippin.jpg">이미지1</option>
+                                    <option value="https://images.unsplash.com/photo-1627483262268-9c2b5b2834b5">이미지2</option>
+                                    <option value="https://images.unsplash.com/photo-1583947215259-38e31be8751f">이미지3</option>
+                                    <option value="https://images.unsplash.com/photo-1570831739435-6601aa3fa4fb">이미지4</option>
+                                </select>
                             </div>
                         </div>
                         <div className="w-full p-2">
