@@ -83,7 +83,7 @@ export default function handler(req, res) {
             Accept: 'application/json',
             'Notion-Version': '2022-02-22',
             'Content-Type': 'application/json',
-            Authorization: 'Bearer secret_eg3hRJs3uzwCWTcKTkMtL1NEibLh83zQjRd9yUoo1D0'
+            Authorization: `Bearer ${TOKEN}`
         },
         data: JsonData
     };
