@@ -2,6 +2,7 @@ import Layout from "../components/layout";
 import Head from "next/head";
 import { TOKEN, DATABASE_ID } from  '../config';
 import ProjectItem from "../components/projects/project-item";
+import axios from "axios";
 
 export default function Projects({projects}) {
     return (
@@ -28,7 +29,23 @@ export default function Projects({projects}) {
 }
 
 export async function getStaticProps(context) {
-    const options = {
+
+    const res = await axios.post(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, JSON.stringify({page_size: 100}), {
+        headers: {
+            Accept: 'application/json',
+            'Notion-Version': '2022-02-22',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${TOKEN}`
+        }
+    });
+
+    const projects = res.data;
+    console.log(projects);
+    return {
+        props: {projects}
+    }
+
+    /* const options = {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -60,5 +77,5 @@ export async function getStaticProps(context) {
 
     return {
         props: {projects},
-    }
+    } */
 }
