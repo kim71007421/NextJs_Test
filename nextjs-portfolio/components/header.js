@@ -24,6 +24,9 @@ export default function Header() {
                 <Link href="/contract">
                     <a className="mr-5 hover:text-gray-900">문의하기</a>
                 </Link>
+                <Link href="/login">
+                    <a className="mr-5 hover:text-gray-900">로그인</a>
+                </Link>
             </nav>
             <DarkModeToggleButton/>
             </div>
