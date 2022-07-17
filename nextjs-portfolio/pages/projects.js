@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
     });
 
     const projects = res.data;
-    console.log(projects);
+    // console.log(projects);
     return {
         props: {projects}
     }

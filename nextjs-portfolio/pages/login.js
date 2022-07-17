@@ -1,6 +1,9 @@
 import axios from "axios";
+// import Redis from 'ioredis';
+// import Cryptr from 'cryptr';
 import Layout from "../components/layout";
 import Head from "next/head";
+import { REDIS_HOST, REDIS_PASSWORD, REDIS_PORT } from  '../config';
 
 export default function Login() {
     const handleSubmit = async (event) => {
@@ -65,4 +68,42 @@ export default function Login() {
             </section>
         </Layout>
     );
+}
+
+export async function getServerSideProps({ req, res }) {
+    // const cookies = req.cookies['madahm_test'];
+    // console.log(cookies);
+
+    // let redis = new Redis({
+    //     port: REDIS_PORT,
+    //     host: REDIS_HOST,
+    //     password: REDIS_PASSWORD
+    // });
+
+    // if (cookies) {
+    //     try{
+    //         const cryptr = new Cryptr('123456');
+    //         const decryptedString = cryptr.decrypt(cookies);
+    //         const response = await redis.get(decryptedString).then((result) => {
+    //             const jsonDecode = JSON.parse(result);
+    //             return jsonDecode;
+    //         });
+
+    //         console.log('response', response);
+    //     } catch (error) {
+    //         res.setHeader('Set-Cookie', 'madahm_test=; path=/; Max-Age=0');
+    //         res.end();
+    //     }
+    // } else {
+    //     return {
+    //         redirect: {
+    //             permanent: false,
+    //             destination: "/"
+    //         }
+    //     }
+    // }
+
+    return {
+        props: {}
+    }
 }

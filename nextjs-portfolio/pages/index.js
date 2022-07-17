@@ -30,14 +30,14 @@ export async function getServerSideProps(context) {
         password: REDIS_PASSWORD
     });
 
-    redis.keys('constant:apply_state:*', (err, keys) => {
-        console.error(err, keys);
-    });
+    // redis.keys('constant:apply_state:*', (err, keys) => {
+    //     console.error(err, keys);
+    // });
     
 
-    redis.get("constant:apply_state:apply").then((result) => {
-        console.log(result);
-    });
+    // redis.get("constant:apply_state:apply").then((result) => {
+    //     console.log(result);
+    // });
     
     return {
         props: {}

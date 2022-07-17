@@ -6,7 +6,7 @@ const nextConfig = {
             'www.notion.so',
             'images.unsplash.com'
         ]
-    },
+    }
     // async rewrites() {
     //     return [
     //         {

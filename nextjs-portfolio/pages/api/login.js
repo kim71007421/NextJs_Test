@@ -1,5 +1,5 @@
 import { serialize } from "cookie";
-
+import Cryptr from 'cryptr';
 
 const cookieOptions = {
     httpOnly: true,
@@ -10,7 +10,9 @@ const cookieOptions = {
 
 
 export default function handler(req, res) {
-    res.setHeader('Set-Cookie', serialize("madahm_test", 'token', cookieOptions));
+    const cryptr = new Cryptr('123456');
+    const encryptedString = cryptr.encrypt('user:P202206132323219169:eyJpdiI6IlFjVGp4TEhWcVZBZGxHSWo0Tm4vL1E9PSIsInZhbHVlIjoiaGVpSUt2TjBGY3lDMVlEYXk1Lzg5YVVnbGRqY2FRUnNWY0Iwc3ZtS0RHWENNQ3JiN1BUTXF0VGV0dCtNSVV4a2lKN1NDVXBSZUVqVXhtN2piZWFDejlkcUlwYjFFTGJFSElCNlh3TFpzdE5iZTZlSUJNRlk1SE4xSDRnbE13SWdOWHdZam5aa0VlcDFKS1Q0R3UrdVU1cmE3dnhxaElBOFVtcEU1ZlRXK29zNnFwVG8ydVJITjN3UmpKK0VTazZlIiwibWFjIjoiNjdjNDcyZGY1MWI4NGIxZmQ0YWNlZGY5Zjg4YTQ1OTA2NGUxMDE0NDdiZTc1NzQ4ZmZjZGRmMzk4MmM3NWU3MyIsInRhZyI6IiJ9');
+    res.setHeader('Set-Cookie', serialize("madahm_test", encryptedString, cookieOptions));
     res.end();
     // console.log(res.getHeader('Set-Cookie'));
 }
